@@ -7,7 +7,7 @@ function parseFBMessage(req, res){
         entry.messaging.forEach((messaging)=>{
             if(messaging.message){
                 const sender = messaging.sender.id;
-                const recipient = messaing.recipient.id;
+                const recipient = messaging.recipient.id;
                 axios.post(`https://graph.facebook.com/v11.0/me/messages?access_token=${settings.PAGE_ACCESS_TOKEN}`,
                     {
                         "messaging_type": "RESPONSE",
