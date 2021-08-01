@@ -1,0 +1,24 @@
+{
+  "name": "fb-pylon-co",
+  "version": "1.0.0",
+  "description": "Facebook Page bot that will reply market value of specific stock, or crypto based on the users request",
+  "main": "app.js",
+  "scripts": {
+    "test": "test",
+    "start": "node app.js"
+  },
+  "keywords": [
+    "crypto",
+    "facebook",
+    "messenger",
+    "stocks"
+  ],
+  "author": "Maco Filoteo",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "express": "^4.17.1",
+    "node-cache": "^5.1.2",
+    "uuid": "^8.3.2"
+  }
+}
