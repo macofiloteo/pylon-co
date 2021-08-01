@@ -1,6 +1,7 @@
 const settings = require('../../settings');
 const axios = require('axios');
 function parseFBMessage(req, res){
+    console.log(req.body);
     const fbEvent = req.body;
     fbEvent.entry.forEach((entry)=>{
         entry.messaging.forEach((messaging)=>{
