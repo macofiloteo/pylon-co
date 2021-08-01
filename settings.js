@@ -1,3 +1,3 @@
-export default{
-    "PAGE_ACCESS_TOKEN": process.env.PYLON_CO_PAGE_ACCESS_TOKEN
-}
+const PAGE_ACCESS_TOKEN = process.env.PYLON_CO_PAGE_ACCESS_TOKEN;
+
+module.exports = {PAGE_ACCESS_TOKEN: PAGE_ACCESS_TOKEN}
