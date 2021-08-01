@@ -21,12 +21,12 @@ function parseFBMessage(req, res){
             const recipient = messaging.recipient.id;
 
             const exchangeRate = await getSingleExchangeRate(message[1], message[2])
-            let message = 'You have an invalid input!';
+            let payload = 'You have an invalid input!';
             
             if(exchangeRate){
                 try{
                     const totalRate = parseFloat(message[0]) * exchangeRate;
-                    message = `${message[0]} ${message[1].toUpperCase()} = ${totalRate} ${message[2].toUpperCase()}`
+                    payload = `${message[0]} ${message[1].toUpperCase()} = ${totalRate} ${message[2].toUpperCase()}`
                 }
                 catch{
                     console.log('Invalid Input! Try Again!');
@@ -40,7 +40,7 @@ function parseFBMessage(req, res){
                       "id": sender
                     },
                     "message": {
-                      "text": message
+                      "text": payload
                     }
                 }
             ).then((data)=>{
