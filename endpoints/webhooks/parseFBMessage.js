@@ -44,7 +44,7 @@ function parseFBMessage(req, res){
 
 function _parseCommand(message){
     const args = [...message];
-    const command = args.unshift();
+    const command = args.shift();
     console.log(command)
     if(!webhookCommands[command]){
         return undefined
