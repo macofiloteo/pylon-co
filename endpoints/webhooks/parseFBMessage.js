@@ -1,36 +1,25 @@
 const settings = require('../../settings');
 const axios = require('axios');
-const getSingleExchangeRate = require('../coins/getSingleExchangeRate');
+const {getSingleExchangeRate} = require('../coins/repository');
+const webhookCommands = require('./webhook-commands');
 
 function parseFBMessage(req, res){
     const fbEvent = req.body;
     fbEvent.entry.forEach((entry)=>{
         entry.messaging.forEach(async (messaging)=>{
             
-            if(!messaging.message){
+            if(!messaging.message || messaging.message.txt.trim().length < 1 || messaging.message.txt[0] !== '!'){
                 return;
             }
 
             const message = messaging.message.text.split(' ');
-
-            if(message.length !== 3){
-                return;
-            }
-
             const sender = messaging.sender.id;
             const recipient = messaging.recipient.id;
 
-            const exchangeRate = await getSingleExchangeRate(message[1], message[2])
-            let payload = 'You have an invalid input! Message format should be: \n{AMOUNT} {COIN} {CURRENCY}\nEx. "1000 slp php"';
-            
-            if(exchangeRate){
-                try{
-                    const totalRate = parseFloat(message[0]) * exchangeRate;
-                    payload = `${message[0]} ${message[1].toUpperCase()} = ${totalRate} ${message[2].toUpperCase()}`
-                }
-                catch{
-                    console.log('Invalid Input! Try Again!');
-                }
+            const payload = _parseCommand(message)
+
+            if(!payload){
+                return;
             }
 
             axios.post(`https://graph.facebook.com/v11.0/me/messages?access_token=${settings.PAGE_ACCESS_TOKEN}`,
@@ -44,13 +33,24 @@ function parseFBMessage(req, res){
                     }
                 }
             ).then((data)=>{
-                console.log(data);
+                console.log(`[*] Payload sent: ${payload}`);
             }).catch((err)=>{
-                console.log(err)
+                console.log(`[!] Payload not sent: ${payload}`);
+                console.warn(err)
             });
         });
     });
     res.sendStatus(200);
+}
+
+function _parseCommand(message){
+    const args = message.split(' ');
+    const command = args.unshift();
+
+    if(!webhookCommands[command]){
+        return undefined
+    }
+    return webhookCommands[command](...args)
 }
 
 module.exports = parseFBMessage;
