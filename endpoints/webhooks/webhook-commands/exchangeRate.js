@@ -1,6 +1,6 @@
 const {getSingleExchangeRate} = require('../../coins/repository');
 
-function exchangeRate(from, to){
+async function exchangeRate(from, to){
     const exchangeRate = await getSingleExchangeRate(from, to)
     let payload = 'You have an invalid input! Message format should be: \n!xrate {AMOUNT} {COIN} {CURRENCY}\nEx. "!xrate 1000 slp php"';
     
