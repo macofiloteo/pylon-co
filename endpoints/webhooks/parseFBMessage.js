@@ -21,7 +21,7 @@ function parseFBMessage(req, res){
             const recipient = messaging.recipient.id;
 
             const exchangeRate = await getSingleExchangeRate(message[1], message[2])
-            let payload = 'You have an invalid input!';
+            let payload = 'You have an invalid input! Message format should be: \n{AMOUNT} {COIN} {CURRENCY}\nEx. "1000 slp php"';
             
             if(exchangeRate){
                 try{
