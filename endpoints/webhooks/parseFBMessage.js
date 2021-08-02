@@ -1,6 +1,5 @@
 const settings = require('../../settings');
 const axios = require('axios');
-const {getSingleExchangeRate} = require('../coins/repository');
 const webhookCommands = require('./webhook-commands');
 
 function parseFBMessage(req, res){

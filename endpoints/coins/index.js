@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const retrieveAllCointsData = require('./retrieveAllCoinsData');
-const getSingleExchangeRate = require('./getSingleExchangeRate');
+const {getSingleExchangeRate} = require('./repository');
 
 router.get('/retrieve-all', retrieveAllCointsData);
 router.get('/get-exchange-rate/:coinsId/:currencyId', async function(req,res){
