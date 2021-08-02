@@ -1,11 +1,11 @@
-const NodeCache = require('../../cache')
+const {VerifyTokenCache} = require('../../cache')
 
 function verifyToken(req, res){
       // Parse the query params
     let mode = req.query['hub.mode'];
     let token = req.query['hub.verify_token'];
     let challenge = req.query['hub.challenge'];
-    const verifyToken = NodeCache.get('verifyToken');
+    const verifyToken = VerifyTokenCache.get('verifyToken');
 
     console.log(verifyToken);
     if(!mode && !token && !verifyToken){

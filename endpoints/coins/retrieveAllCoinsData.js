@@ -1,5 +1,5 @@
 const axios = require('axios');
-const NodeCache = require('../../cache');
+const {CoinsMapCache} = require('../../cache');
 const COIN_GECKO_EXCHANGE_LIST_URL = 'https://api.coingecko.com/api/v3/coins/list'
 
 async function retrieveAllCointsData(req, res){
@@ -8,7 +8,7 @@ async function retrieveAllCointsData(req, res){
     coins.forEach((coin)=>{
         coinsMap[coin.symbol] = coin.id
     });
-    NodeCache.set('coinsMap', coinsMap);
+    CoinsMapCache.set('coinsMap', coinsMap);
     res.send(coinsMap);
 }
 

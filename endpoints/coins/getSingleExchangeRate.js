@@ -1,8 +1,8 @@
 const axios = require('axios');
-const NodeCache = require('../../cache');
+const {CoinsMapCache} = require('../../cache');
 
 async function getSingleExchangeRate(fromCurrency, toCurrency){
-    const coinsMap = NodeCache.get('coinsMap');
+    const coinsMap = CoinsMapCache.get('coinsMap');
     const coin = coinsMap[fromCurrency.toLowerCase()];
     if(!coin){
         return undefined
