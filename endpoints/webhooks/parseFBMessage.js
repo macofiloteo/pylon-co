@@ -15,7 +15,7 @@ function parseFBMessage(req, res){
             const sender = messaging.sender.id;
             const recipient = messaging.recipient.id;
 
-            const payload = _parseCommand(message)
+            const payload = await _parseCommand(message)
             console.log(payload);
             if(!payload){
                 return;
