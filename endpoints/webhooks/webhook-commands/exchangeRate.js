@@ -7,7 +7,7 @@ async function exchangeRate(amount, from, to){
     if(exchangeRate){
         try{
             const totalRate = parseFloat(amount) * exchangeRate;
-            payload = `${from} ${to.toUpperCase()} = ${totalRate} ${to.toUpperCase()}`
+            payload = `${amount} ${from.toUpperCase()} = ${totalRate} ${to.toUpperCase()}`
         }
         catch{
             console.log('Invalid Input! Try Again!');
