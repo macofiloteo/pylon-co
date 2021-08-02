@@ -16,7 +16,7 @@ function parseFBMessage(req, res){
             const recipient = messaging.recipient.id;
 
             const payload = _parseCommand(message)
-
+            console.log(payload);
             if(!payload){
                 return;
             }
@@ -45,7 +45,7 @@ function parseFBMessage(req, res){
 function _parseCommand(message){
     const args = [...message];
     const command = args.unshift();
-
+    console.log(command)
     if(!webhookCommands[command]){
         return undefined
     }
