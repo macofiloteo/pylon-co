@@ -5,8 +5,8 @@ const webhookCommands = require('./webhook-commands');
 function parseFBMessage(req, res){
     const fbEvent = req.body;
     fbEvent.entry.forEach((entry)=>{
+        console.log(entry);
         entry.messaging.forEach(async (messaging)=>{
-            
             if(!messaging.message || messaging.message.text.trim().length < 1 || messaging.message.text[0] !== '!'){
                 return;
             }
